@@ -22,12 +22,26 @@ import java.util.Map;
 public class PatientController {
     private final PatientService patientService;
 
+    /**
+     * Retrieves a list of all patients.
+     *
+     * @return ResponseEntity containing a map with the key "patient" and a list of {@link PatientDTO} objects,
+     *         along with an HTTP status 200 (OK).
+     */
     @GetMapping
     public ResponseEntity<Map<String, List<PatientDTO>>> getAllPatients() {
         List<PatientDTO> patients = patientService.getAllPatients();
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("patient", patients));
     }
 
+    /**
+     * Retrieves a patient by their ID.
+     *
+     * @param id The ID of the patient, which must be a positive number.
+     * @return ResponseEntity containing a map with the key "patient" and the corresponding {@link PatientDTO} object,
+     *         along with an HTTP status 200 (OK).
+     * @throws ElementNotFoundException if no patient is found with the given ID.
+     */
     @GetMapping(value = "/id/{id}")
     public ResponseEntity<Map<String, PatientDTO>> getPatientById(@PathVariable @Positive(message = "Id must be a positive number") int id) {
         PatientDTO patient = patientService.getPatientById(id);
