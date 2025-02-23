@@ -21,6 +21,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -50,6 +51,7 @@ class PatientControllerUnitTest {
 
         mockMvc.perform(get("/api/patient")
                         .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.patient").isArray())
                 .andExpect(jsonPath("$.patient[0].name").value("Bella"));
@@ -62,6 +64,7 @@ class PatientControllerUnitTest {
 
         mockMvc.perform(get("/api/patient/id/1")
                         .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.patient.name").value("Bella"))
                 .andExpect(jsonPath("$.patient.breed").value("Labrador"));
