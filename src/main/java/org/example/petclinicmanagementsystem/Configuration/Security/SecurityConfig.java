@@ -40,6 +40,20 @@ public class SecurityConfig {
                         .requestMatchers("/api/test/owner").hasAnyRole(UserRole.OWNER.getRole())
                         .requestMatchers("/api/test/veterinarian").hasAnyRole(UserRole.VETERINARIAN.getRole())
                         .requestMatchers("/api/test/admin").hasAnyRole(UserRole.ADMIN.getRole())
+                        // OPEN API
+                        .requestMatchers(
+                                "/swagger-ui.html",
+                                "/swagger-ui/index.html",
+                                "/swagger-ui/swagger-ui.css",
+                                "/swagger-ui/index.css",
+                                "/swagger-ui/swagger-ui-bundle.js",
+                                "/swagger-ui/swagger-ui-standalone-preset.js",
+                                "/swagger-ui/swagger-initializer.js",
+                                "/swagger-ui/favicon-32x32.png",
+                                "/swagger-ui/favicon-16x16.png",
+                                "/api-docs",
+                                "/api-docs/swagger-config"
+                                ).permitAll()
                         // API
                         .requestMatchers("/api/patients").hasAnyRole(UserRole.ADMIN.getRole(), UserRole.VETERINARIAN.getRole())
                         .requestMatchers("/api/patients/id/{id}").hasAnyRole(UserRole.ADMIN.getRole(), UserRole.OWNER.getRole(), UserRole.VETERINARIAN.getRole())
