@@ -1,6 +1,12 @@
-INSERT INTO public.Owner (id, first_name, last_name, email, phone, address, city, state, zip)
-VALUES (1, 'John', 'Doe', 'john.doe@example.com', '123456789', '123 Main St', 'Springfield', 'IL', '62704'),
-       (2, 'Jane', 'Smith', 'jane.smith@example.com', '987654321', '456 Oak St', 'Shelbyville', 'IL', '62565');
+INSERT INTO public.User (username, password, email, role)
+VALUES
+    ('john1', '$2a$10$abcdefg1234567890hashedpassword1', 'john.doe@example.com','ROLE_OWNER'),
+    ('jane2', '$2a$10$hijklmn1234567890hashedpassword2',  'jane.smith@example.com','ROLE_VETERINARIAN'),
+    ('admin_user', '$2a$10$opqrst1234567890hashedpassword3', 'admin1@example.com','ROLE_ADMIN');
+
+INSERT INTO public.Owner (id, first_name, last_name, phone, address, city, state, zip)
+VALUES (1, 'John', 'Doe', '123456789', '123 Main St', 'Springfield', 'IL', '62704'),
+       (2, 'Jane', 'Smith', '987654321', '456 Oak St', 'Shelbyville', 'IL', '62565');
 
 INSERT INTO public.Patient (id, owner_id, name, date_of_birth, gender, weight, breed)
 VALUES (1, 1, 'Buddy', '2018-05-10', 'MALE', 30.5, 'Golden Retriever'),

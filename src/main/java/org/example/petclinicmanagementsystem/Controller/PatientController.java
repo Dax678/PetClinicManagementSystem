@@ -18,7 +18,7 @@ import java.util.Map;
 @RestController
 @AllArgsConstructor
 @Validated
-@RequestMapping(value = "/api/patient")
+@RequestMapping(value = "/api/patients")
 public class PatientController {
     private final PatientService patientService;
 

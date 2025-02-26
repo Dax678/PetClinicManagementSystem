@@ -23,6 +23,9 @@ public class Veterinarian {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "user_id")
+    private Long userId;
+
     @Column(name = "first_name")
     private String firstName;
 
@@ -44,4 +47,9 @@ public class Veterinarian {
     @OneToMany
     @JsonIgnore
     private List<Appointment> appointments;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable=false, updatable=false)
+    @JsonIgnore
+    private User user;
 }

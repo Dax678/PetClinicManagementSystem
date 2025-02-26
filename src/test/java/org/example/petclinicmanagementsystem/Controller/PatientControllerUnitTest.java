@@ -1,19 +1,21 @@
 package org.example.petclinicmanagementsystem.Controller;
 
-import org.example.petclinicmanagementsystem.Configuration.Exception.ElementNotFoundException;
 import org.example.petclinicmanagementsystem.Data.DTO.PatientDTO;
 import org.example.petclinicmanagementsystem.Data.Entity.EAnimalGender;
+import org.example.petclinicmanagementsystem.Service.JwtService;
 import org.example.petclinicmanagementsystem.Service.PatientService;
+import org.example.petclinicmanagementsystem.Service.UserInfoDetailsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
@@ -27,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(PatientController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class PatientControllerUnitTest {
 
     @Autowired
@@ -34,6 +37,16 @@ class PatientControllerUnitTest {
 
     @MockBean
     private PatientService patientService;
+
+    @MockBean
+    private JwtService jwtService;
+
+    @MockBean
+    private UserDetailsService userDetailsService;
+
+    @MockBean
+    private UserInfoDetailsService userInfoDetailsService;
+
 
     private PatientDTO samplePatient;
 
@@ -49,7 +62,7 @@ class PatientControllerUnitTest {
 
         when(patientService.getAllPatients()).thenReturn(patientList);
 
-        mockMvc.perform(get("/api/patient")
+        mockMvc.perform(get("/api/patients")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -62,7 +75,7 @@ class PatientControllerUnitTest {
     void getPatientById_ReturnsPatient() throws Exception {
         when(patientService.getPatientById(1)).thenReturn(samplePatient);
 
-        mockMvc.perform(get("/api/patient/id/1")
+        mockMvc.perform(get("/api/patients/id/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())

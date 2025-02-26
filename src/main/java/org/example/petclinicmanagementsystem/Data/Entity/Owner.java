@@ -22,14 +22,14 @@ public class Owner {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "user_id")
+    private Long userId;
+
     @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
-
-    @Column(name = "email")
-    private String email;
 
     @Column(name = "phone")
     private String phone;
@@ -50,15 +50,19 @@ public class Owner {
     @JsonIgnore
     private List<Patient> patients;
 
-    public Owner(String firstName, String lastName, String email, String phone, String address, String city, String state, String zip, List<Patient> patients) {
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable=false, updatable=false)
+    @JsonIgnore
+    private User user;
+
+    public Owner(Long userId, String firstName, String lastName, String phone, String address, String city, String state, String zip) {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.phone = phone;
         this.address = address;
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.patients = patients;
     }
 }
