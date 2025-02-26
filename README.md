@@ -11,6 +11,7 @@ The system allows veterinarians to log in, manage pet medical records, and sched
 - **Authentication**: JWT (Json Web Token)
 - **Testing**: JUnit, Testcontainers, MockMvc
 - **Caching**: Ehcache
+- **API Documentation**: Springdoc OpenAPI (Swagger UI 3)
 
 ## 🔧 Installation & Setup  
 ### Prerequisites  
